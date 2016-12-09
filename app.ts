@@ -8,24 +8,28 @@ Component
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 @Component({
-selector: 'hello-world',
+selector: 'reddit',
 template:`
-<ul>
-<li *ngFor="let name of names">Hello {{ name }}</li>
-</ul>
+<form class ="ui large form segment">
+<h3 class ="ui header">Add a Link </h3>
+
+<div class ="field">
+<label for "title"> Title:</label>
+<input name ="title"
+</div>
+
+
+</form>
 `
 })
-class HelloWorld {
-  names : string[];
+class RedditApp { }
 
-  constructor(){
-    this.names = ['felipe','john','mark','mary'];
-  }
-}
+
+
 @NgModule({
-declarations: [ HelloWorld ],
+declarations: [ RedditApp ],
 imports: [ BrowserModule ],
-bootstrap: [ HelloWorld ],
+bootstrap: [ RedditApp ],
 })
-class HelloWorldAppModule {}
-platformBrowserDynamic().bootstrapModule(HelloWorldAppModule);
+class RedditAppModule {}
+platformBrowserDynamic().bootstrapModule(RedditAppModule);
