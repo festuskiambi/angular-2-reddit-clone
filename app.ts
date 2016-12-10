@@ -17,6 +17,20 @@ this.title = title;
 this.link = link;
 this.votes = votes || 0;
 }
+voteUp(): void {
+this.votes += 1;
+}
+voteDown(): void {
+this.votes -= 1;
+}
+domain(): string {
+try {
+const link: string = this.link.split('//')[1];
+return link.split('/')[0];
+} catch (err) {
+return null;
+}
+}
 }
 
 @Component({
@@ -28,7 +42,7 @@ template: `
 <div class="four wide column center aligned votes">
 <div class="ui statistic">
 <div class="value">
-{{ votes }}
+{{ article.votes }}
 </div>
 <div class="label">
 Points
@@ -36,8 +50,8 @@ Points
 </div>
 </div>
 <div class="twelve wide column">
-<a class="ui large header" href="{{ link }}">
-{{ title }}
+<a class="ui large header" href="{{ article.link }}">
+{{ article.title }}
 </a>
 <ul class="ui big horizontal list voters">
 <li class="item">
@@ -57,20 +71,16 @@ downvote
 `
 })
 class ArticleComponent {
-votes: number
-title: string;
-link: string;
+article:Article;
 constructor() {
-this.title = 'Angular 2';
-this.link = 'http://angular.io';
-this.votes = 10;
+this.article = new Article('Angular 2', 'http://angular.io', 10);
 }
 voteUp(): boolean {
-this.votes += 1;
+this.article.voteUp();
 return false;
 }
 voteDown(): boolean {
-this.votes -= 1;
+this.article.voteDown();
 return false;
 }
 }
