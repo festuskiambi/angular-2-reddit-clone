@@ -8,6 +8,17 @@ Component
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 
+class Article {
+title: string;
+link: string;
+votes: number;
+constructor(title: string, link: string, votes?: number) {
+this.title = title;
+this.link = link;
+this.votes = votes || 0;
+}
+}
+
 @Component({
 selector: 'reddit-article',
 host: {
@@ -54,11 +65,13 @@ this.title = 'Angular 2';
 this.link = 'http://angular.io';
 this.votes = 10;
 }
-voteUp() {
+voteUp(): boolean {
 this.votes += 1;
+return false;
 }
-voteDown() {
+voteDown(): boolean {
 this.votes -= 1;
+return false;
 }
 }
 
