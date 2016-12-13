@@ -54,6 +54,7 @@ Points
 <a class="ui large header" href="{{ article.link }}">
 {{ article.title }}
 </a>
+<div class="meta">({{ article.domain() }})</div>
 <ul class="ui big horizontal list voters">
 <li class="item">
 <a href (click)="voteUp()">
@@ -104,7 +105,7 @@ Submit link
 </form>
 <div class="ui grid posts">
 <reddit-article
-*ngFor="let article of articles"
+*ngFor="let article of sortedArticles()"
 [article]="article">
 </reddit-article>
 </div>
@@ -127,6 +128,9 @@ new Article('Angular Homepage', 'http://angular.io', 1),
   link.value = '';
   return false;
   }
+  sortedArticles(): Article[] {
+return this.articles.sort((a: Article, b: Article) => b.votes - a.votes);
+}
 
 }
 
